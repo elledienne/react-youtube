@@ -128,6 +128,7 @@ class YouTube extends React.Component {
 
   componentDidMount() {
     this.createPlayer();
+    this.setCustomAttributes();
   }
 
   componentDidUpdate(prevProps) {
@@ -142,6 +143,8 @@ class YouTube extends React.Component {
     if (shouldUpdateVideo(prevProps, this.props)) {
       this.updateVideo();
     }
+    
+    this.setCustomAttributes();
   }
 
   componentWillUnmount() {
@@ -295,11 +298,17 @@ class YouTube extends React.Component {
     this.container = container;
   };
 
+  setCustomAttributes = () => {
+    this.internalPlayer.getIframe().then((iframe) => {
+      iframe.setAttribute('wmode', 'transparent');
+    });
+  }
+
   render() {
     return (
-      // <span>
+      <span>
         <div id={this.props.id} className={this.props.className} ref={this.refContainer} />
-      // </span>
+      </span>
     );
   }
 }
