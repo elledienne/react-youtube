@@ -158,6 +158,7 @@ var YouTube = function (_React$Component) {
       _this.internalPlayer.getIframe().then(function (iframe) {
         iframe.setAttribute('id', _this.props.id);
         iframe.setAttribute('class', _this.props.className);
+        iframe.setAttribute('wmode', 'transparent');
       });
     };
 
@@ -195,6 +196,12 @@ var YouTube = function (_React$Component) {
       _this.container = container;
     };
 
+    _this.setCustomAttributes = function () {
+      _this.internalPlayer.getIframe().then(function (iframe) {
+        iframe.setAttribute('wmode', 'transparent');
+      });
+    };
+
     _this.container = null;
     _this.internalPlayer = null;
     return _this;
@@ -211,6 +218,7 @@ var YouTube = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.createPlayer();
+      this.setCustomAttributes();
     }
   }, {
     key: 'componentDidUpdate',
@@ -226,6 +234,8 @@ var YouTube = function (_React$Component) {
       if (shouldUpdateVideo(prevProps, this.props)) {
         this.updateVideo();
       }
+
+      this.setCustomAttributes();
     }
   }, {
     key: 'componentWillUnmount',
@@ -309,11 +319,10 @@ var YouTube = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return (
-        // <span>
+      return _react2.default.createElement(
+        'span',
+        null,
         _react2.default.createElement('div', { id: this.props.id, className: this.props.className, ref: this.refContainer })
-        // </span>
-
       );
     }
   }]);
