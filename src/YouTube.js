@@ -252,6 +252,7 @@ class YouTube extends React.Component {
     this.internalPlayer.getIframe().then((iframe) => {
       iframe.setAttribute('id', this.props.id);
       iframe.setAttribute('class', this.props.className);
+      iframe.setAttribute('wmode', 'transparent');
     });
   };
 
